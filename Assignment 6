@@ -1,0 +1,63 @@
+import tkinter as tk
+from tkinter import messagebox
+
+def evaluate():
+    score = 0
+
+    if var_punctuality.get() == "High":
+        score += 2
+    elif var_punctuality.get() == "Medium":
+        score += 1
+
+    if var_task.get() == "High":
+        score += 2
+    elif var_task.get() == "Medium":
+        score += 1
+
+    if var_quality.get() == "Excellent":
+        score += 3
+    elif var_quality.get() == "Good":
+        score += 2
+    elif var_quality.get() == "Average":
+        score += 1
+
+    if var_teamwork.get() == "Excellent":
+        score += 2
+    elif var_teamwork.get() == "Good":
+        score += 1
+
+    if score >= 8:
+        result = "Outstanding - Eligible for promotion."
+    elif score >= 6:
+        result = "Good - Keep up the good work."
+    elif score >= 4:
+        result = "Average - Needs improvement."
+    else:
+        result = "Poor - Needs attention and training."
+
+    messagebox.showinfo("Result", f"Performance Evaluation:\n{result}")
+
+root = tk.Tk()
+root.title("Employee Performance Evaluator")
+
+tk.Label(root, text="Punctuality").grid(row=0, column=0)
+tk.Label(root, text="Task Completion").grid(row=1, column=0)
+tk.Label(root, text="Quality of Work").grid(row=2, column=0)
+tk.Label(root, text="Teamwork").grid(row=3, column=0)
+
+var_punctuality = tk.StringVar(value="High")
+var_task = tk.StringVar(value="High")
+var_quality = tk.StringVar(value="Excellent")
+var_teamwork = tk.StringVar(value="Excellent")
+
+options1 = ["High", "Medium", "Low"]
+options2 = ["Excellent", "Good", "Average", "Poor"]
+
+tk.OptionMenu(root, var_punctuality, *options1).grid(row=0, column=1)
+tk.OptionMenu(root, var_task, *options1).grid(row=1, column=1)
+tk.OptionMenu(root, var_quality, *options2).grid(row=2, column=1)
+tk.OptionMenu(root, var_teamwork, *options2).grid(row=3, column=1)
+
+tk.Button(root, text="Evaluate", command=evaluate).grid(row=4, column=0, columnspan=2, pady=10)
+
+root.mainloop()
